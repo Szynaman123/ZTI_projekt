@@ -1,0 +1,49 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX sch: <http://schema.org/>
+PREFIX yago: <http://yago-knowledge.org/resource/>
+
+SELECT DISTINCT
+        ?personLabel
+        (?person as ?wikidataID)
+        ?dbpediaID
+        ?yagoID
+WHERE{
+SERVICE <https://query.wikidata.org/sparql>
+          {
+SELECT DISTINCT ?person ?personLabel
+WHERE{
+  ?person wdt:P735 wd:Q18145837;
+   wdt:P734 wd:Q1621139;
+   wdt:P19 wd:Q131128.
+
+  SERVICE wikibase:label
+          {
+            bd:serviceParam wikibase:language "en"
+          }
+}}SERVICE <https://dbpedia.org/sparql>
+          {
+              SELECT ?dbpediaID ?label ?description
+                   WHERE { ?dbpediaID owl:sameAs ?person  ;
+                                      rdfs:label ?label ;
+                                      rdfs:comment ?description .
+                           FILTER (LANG(?label) = "en")
+                           FILTER (LANG(?description) = "en")
+                         }
+      }SERVICE <https://yago-knowledge.org/sparql/query>
+{
+SELECT ?yagoID
+WHERE { ?yagoID sch:givenName yago:Adolf;
+sch:birthPlace yago:Braunau_am_Inn;
+sch:spouse yago:Eva_Braun.
+} }}
