@@ -321,14 +321,9 @@ public class CustomQuery {
         String [] uriTable={getWikidataID(),getDbpediaID(),getYagoID()};
         for (String uri : uriTable)
         {
-            fmt.format("%30s %30s %30s %30s\n", numberOfProperties.get(uri).toString() , descriptionLength.get(uri).toString(), String.format("%.2f",((percentageScore.get(uri))*100.0)).toString(),uri);
+            fmt.format("%30s %30s %30s %30s\n", numberOfProperties.get(uri).toString() , descriptionLength.get(uri).toString(), String.format("%.2f",((percentageScore.get(uri))*100.0)).toString()+"%",uri);
         }
         System.out.println(fmt);
-
-//        System.out.println(getLabel()+"  "+getWikidataID()+"  "+getDbpediaID()+"  "+getYagoID());
-//        System.out.println("Number of Properties: WikiData "+numberOfProperties.get(getWikidataID()).toString()+" DBpedia "+numberOfProperties.get(getDbpediaID()).toString()+" Yago "+numberOfProperties.get(getYagoID()).toString());
-//        System.out.println("Length of Description: WikiData "+descriptionLength.get(getWikidataID()).toString()+" DBpedia "+descriptionLength.get(getDbpediaID()).toString()+" Yago "+descriptionLength.get(getYagoID()).toString());
-//        System.out.println("Percentage Score: WikiData "+percentageScore.get(getWikidataID()).toString()+" DBpedia "+percentageScore.get(getDbpediaID()).toString()+" Yago "+percentageScore.get(getYagoID()).toString());
 
     }
 }

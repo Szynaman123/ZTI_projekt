@@ -23,7 +23,7 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        CustomQuery query=new CustomQuery("src/com/base/querries/query1.txt");
+        CustomQuery query=new CustomQuery("src/com/base/querries/query5.txt");
         query.printResults();
    }}
 
